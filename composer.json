@@ -1,0 +1,25 @@
+{
+    "name": "freshclick/freshclick_api_client_php",
+    "type": "library",
+    "description": "PHP library for FreshClick API. See http://freshclick.ru/api",
+    "keywords": ["freshclick"],
+    "version": "1.1-beta",    
+    "homepage": "https://github.com/FreshClick/freshclick_api_client_php",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.1.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "FreshClick": "src"
+        }
+    },
+    "authors": [
+      {
+        "name": "FreshClick",
+        "email": "help@freshclick.ru",
+        "homepage": "http://www.freshclick.ru",
+        "role": "Company"
+      }
+    ]
+}
