@@ -42,7 +42,7 @@ function echoTest($code,$result,$freshclick) {
 
 <?php
 if($token){
-    $freshclick=new \FreshClick\FreshClick($token);
+    $freshclick=new \FreshClick\FreshClick($token); 
     $result=$freshclick->send('hello',['message'=>'Hello World!']);
     echoTest('$freshclick->send("hello",["message"=>"Hello World!"])', $result, $freshclick);
 

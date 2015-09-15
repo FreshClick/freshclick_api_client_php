@@ -111,7 +111,13 @@ class FreshClick {
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_TIMEOUT, $this->request_timeout);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, $this->verify_ssl);
+        if($this->verify_ssl){
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);            
+        }
+        else{
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);            
+            curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE);                        
+        }
 
         if (!empty($post_data)) {
           curl_setopt($ch, CURLOPT_POST, 1);
