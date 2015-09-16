@@ -46,7 +46,7 @@ if($token){
     $result=$freshclick->send('hello',['message'=>'Hello World!']);
     echoTest('$freshclick->send("hello",["message"=>"Hello World!"])', $result, $freshclick);
 
-    $result=$freshclick->client('Иванов','ivanov@mail.ru','+79161234567')->send('register');
+    $result=$freshclick->userInfo('Иванов','ivanov@mail.ru','+79161234567')->send('register');
     $freshclick->addGood('77-78878', 'iPhone', 35000.40,5)
                ->addGood(444, 'MacBook', 90556)
                ->order(4554, 88455)

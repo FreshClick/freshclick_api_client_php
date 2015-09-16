@@ -12,6 +12,7 @@ class FreshClick {
     public $params=[];
     public $type;
     public $error_info;
+    public $user;
 
     private $api_target;
     private $auth_token;
@@ -29,7 +30,12 @@ class FreshClick {
         return $this;
     }
     
-    public function client($name,$email=null,$phone=null){
+    public function setUser($user) {
+        $this->user=$user;
+        return $this;        
+    }
+    
+    public function userInfo($name,$email=null,$phone=null){
         $this->params['_name']=$name;        
         if($email){
             $this->params['_email']=$email;
@@ -52,19 +58,37 @@ class FreshClick {
         }
         return $this;        
     }
+    
+    public function sendEvents($events){
+        $response=$this->curl_request($this->api_target.'/set',  
+                json_encode($events, JSON_UNESCAPED_UNICODE));
+        if($response===false){
+            return false;
+        }
+
+        $result=json_decode($response);
+        if(!empty($result->error)){
+            $this->error_info=$result->error;
+            return false;
+        }            
+        return $result;        
+    }
 
     public function send($event=null,$params=[]) {
         if(empty($event)){
-            if(empty($this->event)){
-                throw new InvalidParamException("Type of event not set");
+            if(empty($this->event)&&!empty($this->params)){
+                $event='_params';
             }
-            else{
+            elseif(!empty($this->event)){
                 $event= $this->event;
                 $this->event=null;
             }
+            else{
+                throw new InvalidParamException("Type of event not set");
+            }
         }
         $send_event=["_type"=>$event,
-                    "_uid"=>isset($_COOKIE["_freshclick_id"])?$_COOKIE["_freshclick_id"]:null,
+                    "_uid"=> $this->user?:(isset($_COOKIE["_freshclick_id"])?$_COOKIE["_freshclick_id"]:null),
                     "_sess"=>isset($_COOKIE["_freshclick_s"])?$_COOKIE["_freshclick_s"]:null];  
         $data=  array_merge($send_event,$params);
         
