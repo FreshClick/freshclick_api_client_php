@@ -48,8 +48,8 @@ if($token){
 
     $result=$freshclick->userInfo('Иванов','ivanov@mail.ru','+79161234567')->send('register');
     $freshclick->addGood('77-78878', 'iPhone', 35000.40,5)
-               ->addGood(444, 'MacBook', 90556)
-               ->order(4554, 88455)
+               ->addGood(2323, 'MacBook', 90556)
+               ->order(555, 88455)
                ->send();
     echoTest("\$freshclick->addGood('77-78878', 'iPhone', 35000.40,5)
                ->addGood(444, 'MacBook', 90556)
